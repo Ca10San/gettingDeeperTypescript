@@ -1,3 +1,4 @@
+import { logarTempoDeExecucao } from '../decorators/logar-tempo-de-execucao.js';
 import { Negociacao } from '../models/negociacao.js';
 import { Negociacoes } from '../models/negociacoes.js';
 import { NegociacoesView } from '../views/negociacoes-view.js';
@@ -19,6 +20,7 @@ export class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
 
+    @logarTempoDeExecucao()
     public adiciona(): void {
         const negociacao = Negociacao.criaDe(
             this.inputData.value,
@@ -34,6 +36,7 @@ export class NegociacaoController {
         this.atualizaView();
     }
     
+    @logarTempoDeExecucao()
     public atualizaView(): void {
         this.negociacoesView.update(this.negociacoes);
         this.mensagemView.update("Negociação adicionada com sucesso!");
