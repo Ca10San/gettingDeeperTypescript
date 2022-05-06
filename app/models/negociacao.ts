@@ -1,6 +1,5 @@
-import { Imprimivel } from "../interfaces/imprimivel.js";
-
-export class Negociacao implements Imprimivel {
+import { Modelo } from "../interfaces/modelo.js";
+export class Negociacao implements Modelo<Negociacao> {
     constructor(
         private _data: Date, 
         public readonly quantidade: number, 
@@ -30,5 +29,11 @@ export class Negociacao implements Imprimivel {
             Quantidade: ${this.quantidade},
             Valor: ${this.valor}
         `;
+    }
+
+    public jaExiste(negociacao: Negociacao): boolean {
+        return this.data.getDate() === negociacao.data.getDate()
+            && this.data.getMonth() === negociacao.data.getMonth()
+            && this.data.getFullYear() === negociacao.data.getFullYear();
     }
 }

@@ -1,7 +1,7 @@
 import { Negociacao } from './negociacao.js';
-import { Imprimivel } from "../interfaces/imprimivel.js";
+import { Modelo } from '../interfaces/modelo.js';
 
-export class Negociacoes implements Imprimivel {
+export class Negociacoes implements Modelo<Negociacoes> {
     private negociacoes: Negociacao[] = [];
 
     public adiciona(negociacao: Negociacao) {
@@ -13,8 +13,10 @@ export class Negociacoes implements Imprimivel {
     }
 
     public paraTexto(): string {
-        return JSON.stringify(
-            this.negociacoes.map(negociacao => negociacao.paraTexto())
-        );
+        return JSON.stringify(this.negociacoes, null, 2);
+    }
+
+    public jaExiste(negociacoes: Negociacoes): boolean {
+        return JSON.stringify(this.negociacoes) === JSON.stringify(negociacoes.lista());
     }
 }
